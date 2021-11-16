@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace CodeChallenge1.Models
 {
-    public class AlbumVM
+    public class AlbumTitleVM
     {
-        public AlbumVM() { }
+        public AlbumTitleVM() { }
 
-        public AlbumVM(Album src)
+        public AlbumTitleVM(Album src)
         {
             Title = src.Title;
         }

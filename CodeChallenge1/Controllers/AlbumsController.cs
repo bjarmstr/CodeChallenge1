@@ -16,9 +16,9 @@ namespace CodeChallenge1.Controllers
     public class AlbumsController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<List<Album>>> GetAll()
+        public async Task<ActionResult<List<AlbumTitleVM>>> GetAll()
         {
-            List<Album> albums = new();
+            List<AlbumTitleVM> albumTitles = new();
 
             using (var client = new HttpClient())
             {
@@ -34,10 +34,10 @@ namespace CodeChallenge1.Controllers
                 {
                     //Storing the response details recieved from web api
                     var albumResponse = Res.Content.ReadAsStringAsync().Result;
-                    albums = JsonConvert.DeserializeObject<List<Album>>(albumResponse);
+                    albumTitles = JsonConvert.DeserializeObject<List<AlbumTitleVM>>(albumResponse);
                 }
 
-                return Ok(albums);
+                return Ok(albumTitles);
             }
         }
     }
