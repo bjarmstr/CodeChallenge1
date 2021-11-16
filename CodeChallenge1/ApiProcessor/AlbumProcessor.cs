@@ -27,7 +27,7 @@ namespace CodeChallenge1.ApiProcessor
                     var albumResponse = Res.Content.ReadAsStringAsync().Result;
                     var albumTitles = JsonConvert.DeserializeObject<List<AlbumTitleVM>>(albumResponse);
                     //if a search term is given filter album titles
-                    if (search != "") return albumTitles.Where(album => album.Title.Contains(search.ToLower())).ToList(); 
+                    if (search != "") return albumTitles.Where(album => album.Title.Contains(search,StringComparison.OrdinalIgnoreCase)).ToList(); 
                     return albumTitles;
                 }
                 else

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CodeChallenge1.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/albums")]
     [ApiController]
     public class AlbumsController : ControllerBase
     {
