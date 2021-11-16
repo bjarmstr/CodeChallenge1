@@ -1,5 +1,4 @@
 ﻿using CodeChallenge1.ApiProcessor.Interfaces;
-using CodeChallenge1.Helpers;
 using CodeChallenge1.Models;
 using Newtonsoft.Json;
 using System;
@@ -13,7 +12,7 @@ namespace CodeChallenge1.ApiProcessor
 {
     public class AlbumProcessor: IAlbumProcessor
     { 
-        public async Task<List<AlbumTitleVM>> LoadAlbums()
+        public async Task<List<AlbumTitleVM>> LoadAlbums(string search)
         {
             using (var client = new HttpClient())
             {
@@ -27,6 +26,8 @@ namespace CodeChallenge1.ApiProcessor
                     //Storing the response details recieved from web api
                     var albumResponse = Res.Content.ReadAsStringAsync().Result;
                     var albumTitles = JsonConvert.DeserializeObject<List<AlbumTitleVM>>(albumResponse);
+                    //if a search term is given filter album titles
+                    if (search != "") return albumTitles.Where(album => album.Title.Contains(search.ToLower())).ToList(); 
                     return albumTitles;
                 }
                 else
@@ -34,6 +35,10 @@ namespace CodeChallenge1.ApiProcessor
                     throw new Exception("API request unavailable, please try again later");
                 }
             }
+      
+
         }
+
+
     }
 }

@@ -8,7 +8,7 @@ namespace CodeChallenge1.ApiProcessor.Interfaces
 {
     public interface IAlbumProcessor
     {
-        Task<List<AlbumTitleVM>> LoadAlbums();
+        Task<List<AlbumTitleVM>> LoadAlbums(string search);
 
     }
 }

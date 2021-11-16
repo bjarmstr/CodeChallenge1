@@ -23,10 +23,14 @@ namespace CodeChallenge1.Controllers
         {
             _albumProcessor = albumProcessor;
         }
+        
+        /// <summary>
+        /// Get a list of Album Titles, query to filter by a search term is optional
+        /// </summary>
         [HttpGet]
-        public async Task<ActionResult<List<AlbumTitleVM>>> GetAll()
+        public async Task<ActionResult<List<AlbumTitleVM>>> GetAlbums([FromQuery] string search="")
         {
-            var albumTitles = await _albumProcessor.LoadAlbums();
+            var albumTitles = await _albumProcessor.LoadAlbums(search);
 
             return Ok(albumTitles);
 
