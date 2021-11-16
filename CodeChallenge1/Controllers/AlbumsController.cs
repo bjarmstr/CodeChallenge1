@@ -27,9 +27,11 @@ namespace CodeChallenge1.Controllers
         public async Task<ActionResult<List<AlbumTitleVM>>> GetAll()
         {
             var albumTitles = await _albumProcessor.LoadAlbums();
-                
-                return Ok(albumTitles);
-            
+
+            return Ok(albumTitles);
+
         }
+
+      
     }
 }
