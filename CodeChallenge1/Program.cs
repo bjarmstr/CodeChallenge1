@@ -1,3 +1,4 @@
+using CodeChallenge1.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -14,6 +15,7 @@ namespace CodeChallenge1
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+            ApiHelper.InitializeClient();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

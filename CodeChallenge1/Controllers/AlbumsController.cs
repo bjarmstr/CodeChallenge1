@@ -1,4 +1,6 @@
-﻿using CodeChallenge1.Models;
+﻿using CodeChallenge1.ApiProcessor;
+using CodeChallenge1.ApiProcessor.Interfaces;
+using CodeChallenge1.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -15,30 +17,19 @@ namespace CodeChallenge1.Controllers
     [ApiController]
     public class AlbumsController : ControllerBase
     {
+        private readonly IAlbumProcessor _albumProcessor;
+
+        public AlbumsController(IAlbumProcessor albumProcessor)
+        {
+            _albumProcessor = albumProcessor;
+        }
         [HttpGet]
         public async Task<ActionResult<List<AlbumTitleVM>>> GetAll()
         {
-            List<AlbumTitleVM> albumTitles = new();
-
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com/");
-                client.DefaultRequestHeaders.Clear();
-                //Define request data format
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-               
-                //in the "" can go additional url folders to add to the baseurl
-                HttpResponseMessage Res = await client.GetAsync("albums");
-                //Checking the response is successful or not which is sent using HttpClient
-                if (Res.IsSuccessStatusCode)
-                {
-                    //Storing the response details recieved from web api
-                    var albumResponse = Res.Content.ReadAsStringAsync().Result;
-                    albumTitles = JsonConvert.DeserializeObject<List<AlbumTitleVM>>(albumResponse);
-                }
-
+            var albumTitles = await _albumProcessor.LoadAlbums();
+                
                 return Ok(albumTitles);
-            }
+            
         }
     }
 }
