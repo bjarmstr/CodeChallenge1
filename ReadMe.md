@@ -12,7 +12,7 @@
   * docker-compose build
   * docker-compose up  
 ### Access Api
-* Feature 1 can be found at https://localhost:34003/api/cups/swap
-* Feature 2 can be found at https://localhost:34003/api/albums
+* Feature 1 can be found at https://localhost:34043/api/cups/swap
+* Feature 2 can be found at https://localhost:34043/api/albums
 
   
