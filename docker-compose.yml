@@ -6,3 +6,6 @@ services:
     build:
       context: .
       dockerfile: CodeChallenge1/Dockerfile
+    ports:
+     - "34080:80"
+     - "34043:443"
